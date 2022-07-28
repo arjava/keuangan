@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:keuangan/model/failed_login.dart';
+import 'package:keuangan/model/response_login.dart';
+import 'package:keuangan/provider/login_provider.dart';
+import 'package:keuangan/utils/shared_prefs.dart';
 
 import '../model/users.dart';
 import '../utils/Constant.dart';
@@ -206,11 +210,33 @@ class LoginPage extends StatelessWidget {
         }
         return null;
       },
-      onLogin: (loginData) {
-        debugPrint('Login info');
-        debugPrint('Name: ${loginData.name}');
-        debugPrint('Password: ${loginData.password}');
-        return _loginUser(loginData);
+      onLogin: (loginData) async {
+        // debugPrint('Login info');
+        // debugPrint('Name: ${loginData.name}');
+        // debugPrint('Password: ${loginData.password}');
+        // return _loginUser(loginData);
+        try {
+          ApiLoginProvider _accountApiProvider = ApiLoginProvider();
+          Object response = await _accountApiProvider.getUserLogin(
+              loginData.name, loginData.password);
+          if (response is LoginResponse) {
+            LoginResponse loginResponse = response;
+            if (loginResponse.status.login) {
+              SharedPrefs sharedPref = SharedPrefs();
+              await sharedPref.saveDataInt("reg_member_id", 0);
+              await sharedPref.saveData(
+                  "reg_member_id", response.data.user.userId);
+              return null;
+            } else {
+              return "ops ada maintenance server nih!";
+            }
+          } else {
+            FailedLogin failedLogin = response as FailedLogin;
+            return failedLogin.status?.errInfo;
+          }
+        } catch (e) {
+          print(e);
+        }
       },
       onSignup: (signupData) {
         debugPrint('Signup info');

@@ -11,12 +11,14 @@ class LoginResponse {
   late final Data data;
   late final DebugParamSent debugParamSent;
   late final String debugLive;
+  late final String error;
 
-  LoginResponse.fromJson(Map<String, dynamic> json){
+  LoginResponse.fromJson(Map<String, dynamic> json) {
     status = Status.fromJson(json['status']);
     data = Data.fromJson(json['data']);
     debugParamSent = DebugParamSent.fromJson(json['debug-param-sent']);
     debugLive = json['debug-live'];
+    error = "";
   }
 
   Map<String, dynamic> toJson() {
@@ -27,6 +29,19 @@ class LoginResponse {
     _data['debug-live'] = debugLive;
     return _data;
   }
+
+  LoginResponse.withError(String errorValue)
+      : data = Data(
+            user: User(
+                userId: "",
+                language: "",
+                fullName: "",
+                phone: "",
+                emailAddress: "",
+                role: "",
+                designation: "",
+                outletId: "")),
+        error = errorValue;
 }
 
 class Status {
@@ -45,7 +60,7 @@ class Status {
   late final String apiVer;
   late final String devDebugParam;
 
-  Status.fromJson(Map<String, dynamic> json){
+  Status.fromJson(Map<String, dynamic> json) {
     error = json['error'];
     login = json['login'];
     userId = json['user_id'];
@@ -72,7 +87,7 @@ class Data {
   });
   late final User user;
 
-  Data.fromJson(Map<String, dynamic> json){
+  Data.fromJson(Map<String, dynamic> json) {
     user = User.fromJson(json['user']);
   }
 
@@ -103,7 +118,7 @@ class User {
   late final String designation;
   late final String outletId;
 
-  User.fromJson(Map<String, dynamic> json){
+  User.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     language = json['language'];
     fullName = json['full_name'];
@@ -136,10 +151,18 @@ class DebugParamSent {
   String? actLoginUnAdminAdminComUpAdmin;
 
   factory DebugParamSent.fromJson(Map<String, dynamic> json) => DebugParamSent(
-    actLoginUnAdminAdminComUpAdmin: json["{\"act\":\"LOGIN\",\"un\":\"admin@admin_com\",\"up\":\"admin\"}"] == null ? null : json["{\"act\":\"LOGIN\",\"un\":\"admin@admin_com\",\"up\":\"admin\"}"],
-  );
+        actLoginUnAdminAdminComUpAdmin: json[
+                    "{\"act\":\"LOGIN\",\"un\":\"admin@admin_com\",\"up\":\"admin\"}"] ==
+                null
+            ? null
+            : json[
+                "{\"act\":\"LOGIN\",\"un\":\"admin@admin_com\",\"up\":\"admin\"}"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "{\"act\":\"LOGIN\",\"un\":\"admin@admin_com\",\"up\":\"admin\"}": actLoginUnAdminAdminComUpAdmin == null ? null : actLoginUnAdminAdminComUpAdmin,
-  };
+        "{\"act\":\"LOGIN\",\"un\":\"admin@admin_com\",\"up\":\"admin\"}":
+            actLoginUnAdminAdminComUpAdmin == null
+                ? null
+                : actLoginUnAdminAdminComUpAdmin,
+      };
 }
