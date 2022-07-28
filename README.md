@@ -1,4 +1,5 @@
 # keuangan
+<<<<<<< HEAD
 
 Apps Keuangan and Information Kurs
 
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+app information money and kurs
+>>>>>>> 8112c489c0e7018e488ccece24bf5e328c884894
