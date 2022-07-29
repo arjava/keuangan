@@ -40,6 +40,8 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   dio: ^4.0.6
   shared_preferences: ^2.0.15
+  floating_navbar: ^2.0.2
+  shape_of_view_null_safe: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +85,7 @@ flutter:
      - assets/btn_report_non_active.png
      - assets/btn_transaction_non_active.png
      - assets/btn_home_non_active.png
+     - assets/ic_refresh.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

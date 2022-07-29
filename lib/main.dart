@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/screens/dashboard.dart';
+import 'package:keuangan/screens/home_page.dart';
 import 'package:keuangan/screens/login_page.dart';
 import 'package:keuangan/utils/transaction_route_observer.dart';
 
@@ -14,10 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login Demo',
+      title: 'App Keuangan',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textSelectionTheme:
-        const TextSelectionThemeData(cursorColor: Colors.orange),
+            const TextSelectionThemeData(cursorColor: Colors.orange),
         // fontFamily: 'SourceSansPro',
         textTheme: TextTheme(
           headline3: const TextStyle(
@@ -55,6 +57,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginPage.routeName: (context) => const LoginPage(),
         DashboardScreen.routeName: (context) => const DashboardScreen(),
+        // HomePage.routeName: (context) => const HomePage()
       },
     );
   }
