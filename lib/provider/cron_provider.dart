@@ -1,17 +1,12 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:keuangan/model/failed_login.dart';
-import 'package:keuangan/model/response_login.dart';
+import 'package:keuangan/model/response_background_hit.dart';
+import 'package:keuangan/utils/Constant.dart';
 
-import '../utils/Constant.dart';
-
-class ApiLoginProvider {
-  final String _login = Constants.endpoint("/API/Auth");
+class CronApiProvider {
+  final String _hitBackground = Constants.endpoint("/API/BgService/Hit");
 
   Dio? _dio;
-
-  ApiLoginProvider() {
+  CronApiProvider() {
     BaseOptions baseOptions = BaseOptions(
       receiveTimeout: 50000,
       connectTimeout: 50000,
@@ -20,20 +15,20 @@ class ApiLoginProvider {
     Constants.setupLoggingInterceptor(_dio);
   }
 
-  Future<Object> getUserLogin(username, password) async {
+  Future<Object> hitBackground() async {
     try {
-      Response? response = await _dio?.post(_login, data: {
-        "act": "LOGIN",
-        "un": username,
-        "up": password,
+      Response? response = await _dio?.post(_hitBackground, data: {
+        "nama": "Abdurrokhman",
+        "email": "arjava379@gmail.com",
+        "nohp": "08988825256",
       });
       // var valueMap = json.decode(response?.data);
       if (response?.data['status']['error'] == 0) {
         print("RESPONSE LOGIN Atas");
-        return LoginResponse.fromJson(response?.data);
+        return HitBackgroundResponse.fromJson(response?.data);
       } else {
         print("RESPONSE LOGIN Bawah");
-        return FailedLogin.fromJson(response?.data);
+        return HitBackgroundResponse.fromJson(response?.data);
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");

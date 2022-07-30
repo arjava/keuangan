@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
   readMember(String? key) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences?.getInstance();
     return await json.decode(prefs.getString(key!)!);
   }
 

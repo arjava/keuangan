@@ -42,6 +42,7 @@ dependencies:
   shared_preferences: ^2.0.15
   floating_navbar: ^2.0.2
   shape_of_view_null_safe: ^2.0.0
+  cron: ^0.5.0
 
 dev_dependencies:
   flutter_test:

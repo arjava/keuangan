@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/screens/dashboard.dart';
-import 'package:keuangan/screens/home_page.dart';
 import 'package:keuangan/screens/login_page.dart';
+import 'package:keuangan/screens/splash_screen.dart';
 import 'package:keuangan/utils/transaction_route_observer.dart';
 
 void main() {
@@ -53,11 +53,11 @@ class MyApp extends StatelessWidget {
             .copyWith(secondary: Colors.orange),
       ),
       navigatorObservers: [TransitionRouteObserver()],
-      initialRoute: LoginPage.routeName,
+      initialRoute: SplashScreen.routName,
       routes: {
+        SplashScreen.routName: (context) => const SplashScreen(),
         LoginPage.routeName: (context) => const LoginPage(),
-        DashboardScreen.routeName: (context) => const DashboardScreen(),
-        // HomePage.routeName: (context) => const HomePage()
+        DashboardScreen.routeName: (context) => const DashboardScreen()
       },
     );
   }

@@ -1,7 +1,12 @@
+// import 'dart:ffi';
+
+import 'package:cron/cron.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:keuangan/model/response_background_hit.dart';
+import 'package:keuangan/provider/cron_provider.dart';
 import 'package:keuangan/screens/home_page.dart';
 import 'package:keuangan/screens/report_page.dart';
 import 'package:keuangan/screens/tools_page.dart';
@@ -20,6 +25,34 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   var indexTab = 0;
   final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    startCron();
+    super.initState();
+  }
+
+  Future<void> startCron() async {
+    final cron = Cron();
+
+    try {
+      cron.schedule(Schedule.parse('0/30 * * * * ?'), () async {
+        print(DateTime.now());
+        CronApiProvider _apiProvider = CronApiProvider();
+        Object response = await _apiProvider.hitBackground();
+        HitBackgroundResponse responseBackground =
+            response as HitBackgroundResponse;
+        print(responseBackground.data?.sender?.email);
+      });
+
+      // await Future.delayed(Duration(seconds: 30));
+      // await cron.close();
+    } on ScheduleParseException {
+      // "ScheduleParseException" is thrown if cron parsing is failed.
+      // await cron.close();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
