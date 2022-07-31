@@ -1,4 +1,13 @@
-import 'package:dio/dio.dart';
+// ignore: file_names
+import 'package:dio/dio.dart'
+    show
+        Dio,
+        DioError,
+        DioErrorType,
+        InterceptorsWrapper,
+        RequestOptions,
+        Response;
+import 'package:flutter/foundation.dart';
 
 class Constants {
   static String endpoint(String url) {
@@ -14,16 +23,20 @@ class Constants {
   static const String logoTag = 'com.arjavax.logo';
   static const String titleTag = 'com.arjavax.title';
 
-  static void setupLoggingInterceptor(Dio? _dio) {
+  static void setupLoggingInterceptor(Dio? dio) {
     int? maxCharactersPerLine = 200;
 
-    _dio?.interceptors.add(
+    dio?.interceptors.add(
         InterceptorsWrapper(onRequest: (RequestOptions options, handler) async {
-      print(options.data);
+      if (kDebugMode) {
+        print(options.data);
+      }
       return handler.next(options);
     }, onResponse: (Response? response, handler) async {
-      print(
-          "<-- ${response?.statusCode} ${response?.requestOptions.method} ${response?.requestOptions.path}");
+      if (kDebugMode) {
+        print(
+            "<-- ${response?.statusCode} ${response?.requestOptions.method} ${response?.requestOptions.path}");
+      }
       String? responseAsString = response?.data.toString();
       if (responseAsString!.length > maxCharactersPerLine) {
         int? iterations =
@@ -33,42 +46,35 @@ class Constants {
           if (endingIndex > responseAsString.length) {
             endingIndex = responseAsString.length;
           }
-          print(responseAsString.substring(
-              i * maxCharactersPerLine, endingIndex));
+          if (kDebugMode) {
+            print(responseAsString.substring(
+                i * maxCharactersPerLine, endingIndex));
+          }
         }
       } else {
-        print(response?.data);
+        if (kDebugMode) {
+          print(response?.data);
+        }
       }
-      print("<-- END HTTP");
+      if (kDebugMode) {
+        print("<-- END HTTP");
+      }
       return handler.next(response!);
     }, onError: (DioError e, handler) async {
-      String errorDescription = "";
-      if (e is DioError) {
-        switch (e.type) {
-          case DioErrorType.cancel:
-            errorDescription = "Request to API server was cancelled";
-            break;
-          case DioErrorType.connectTimeout:
-            errorDescription = "Connection timeout with API server";
-            break;
-          case DioErrorType.other:
-            errorDescription =
-                "Connection to API server failed due to internet connection";
-            break;
-          case DioErrorType.receiveTimeout:
-            errorDescription = "Receive timeout in connection with API server";
-            break;
-          case DioErrorType.response:
-            errorDescription =
-                "Received invalid status code: ${e.response?.statusCode}";
-            break;
-          case DioErrorType.sendTimeout:
-            break;
-        }
-      } else {
-        errorDescription = "Unexpected error occured";
+      switch (e.type) {
+        case DioErrorType.cancel:
+          break;
+        case DioErrorType.connectTimeout:
+          break;
+        case DioErrorType.other:
+          break;
+        case DioErrorType.receiveTimeout:
+          break;
+        case DioErrorType.response:
+          break;
+        case DioErrorType.sendTimeout:
+          break;
       }
-
       return handler.next(e);
     }));
   }
