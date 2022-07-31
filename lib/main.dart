@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/screens/dashboard.dart';
+import 'package:keuangan/screens/keluar_page.dart';
 import 'package:keuangan/screens/login_page.dart';
 import 'package:keuangan/screens/masuk_page.dart';
 import 'package:keuangan/screens/splash_screen.dart';
@@ -59,7 +60,8 @@ class MyApp extends StatelessWidget {
         SplashScreen.routName: (context) => const SplashScreen(),
         LoginPage.routeName: (context) => const LoginPage(),
         DashboardScreen.routeName: (context) => const DashboardScreen(),
-        MasukPage.routName: ((context) => const MasukPage())
+        MasukPage.routName: ((context) => const MasukPage()),
+        KeluarPage.routName: ((context) => const KeluarPage())
       },
     );
   }

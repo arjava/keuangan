@@ -3,6 +3,7 @@
 import 'package:cron/cron.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:keuangan/model/response_background_hit.dart';
 import 'package:keuangan/provider/cron_provider.dart';
 import 'package:keuangan/screens/home_page.dart';
@@ -67,6 +68,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
         appBar: AppBar(
+          systemOverlayStyle:
+              const SystemUiOverlayStyle(statusBarColor: Color(0xffffffff)),
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xffffffff),
           title: SizedBox(
