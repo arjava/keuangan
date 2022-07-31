@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/screens/dashboard.dart';
 import 'package:keuangan/screens/login_page.dart';
+import 'package:keuangan/screens/masuk_page.dart';
 import 'package:keuangan/screens/splash_screen.dart';
 import 'package:keuangan/utils/transaction_route_observer.dart';
 
@@ -57,7 +58,8 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routName: (context) => const SplashScreen(),
         LoginPage.routeName: (context) => const LoginPage(),
-        DashboardScreen.routeName: (context) => const DashboardScreen()
+        DashboardScreen.routeName: (context) => const DashboardScreen(),
+        MasukPage.routName: ((context) => const MasukPage())
       },
     );
   }
