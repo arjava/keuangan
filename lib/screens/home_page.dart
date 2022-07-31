@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/screens/keluar_page.dart';
 import 'package:keuangan/screens/masuk_page.dart';
+import 'package:keuangan/screens/pindah_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';
@@ -219,16 +220,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       ],
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Image.asset(
-                                          "assets/btn_input_pindah.png"),
-                                      const Text(
-                                        "PINDAH",
-                                        style:
-                                            TextStyle(color: Color(0xff2787BD)),
-                                      )
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, PindahPage.routName);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                            "assets/btn_input_pindah.png"),
+                                        const Text(
+                                          "PINDAH",
+                                          style: TextStyle(
+                                              color: Color(0xff2787BD)),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                   Column(
                                     children: [
