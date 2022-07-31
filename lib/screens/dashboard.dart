@@ -67,7 +67,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
         appBar: AppBar(
-          backgroundColor: Color(0xffffffff),
+          automaticallyImplyLeading: false,
+          backgroundColor: const Color(0xffffffff),
           title: SizedBox(
             height: MediaQuery.of(context).size.height / 5,
             width: MediaQuery.of(context).size.width,
