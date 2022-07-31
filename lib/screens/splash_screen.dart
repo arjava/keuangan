@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:keuangan/screens/dashboard.dart';
 import 'package:keuangan/screens/login_page.dart';
 import 'package:keuangan/utils/shared_prefs.dart';
@@ -13,8 +14,14 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   SharedPrefs sharedPrefs = SharedPrefs();
+  SystemUiOverlayStyle _currentStyle = SystemUiOverlayStyle.light;
   @override
   void initState() {
+    setState(() {
+      _currentStyle = SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: const Color(0xffffffff),
+      );
+    });
     if (mounted) {
       Future.delayed(const Duration(seconds: 2), () {
         checkSession();

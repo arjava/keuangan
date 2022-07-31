@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/screens/dashboard.dart';
 import 'package:keuangan/screens/keluar_page.dart';
+import 'package:keuangan/screens/kurs_page.dart';
 import 'package:keuangan/screens/login_page.dart';
 import 'package:keuangan/screens/masuk_page.dart';
+import 'package:keuangan/screens/mutasi_page.dart';
 import 'package:keuangan/screens/pindah_page.dart';
 import 'package:keuangan/screens/splash_screen.dart';
 import 'package:keuangan/utils/transaction_route_observer.dart';
@@ -63,7 +65,9 @@ class MyApp extends StatelessWidget {
         DashboardScreen.routeName: (context) => const DashboardScreen(),
         MasukPage.routName: ((context) => const MasukPage()),
         KeluarPage.routName: ((context) => const KeluarPage()),
-        PindahPage.routName: ((context) => const PindahPage())
+        PindahPage.routName: ((context) => const PindahPage()),
+        MutasiPage.routName: ((context) => const MutasiPage()),
+        KursPage.routName: ((context) => const KursPage())
       },
     );
   }

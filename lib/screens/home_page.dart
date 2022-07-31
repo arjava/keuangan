@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/screens/keluar_page.dart';
+import 'package:keuangan/screens/kurs_page.dart';
 import 'package:keuangan/screens/masuk_page.dart';
+import 'package:keuangan/screens/mutasi_page.dart';
 import 'package:keuangan/screens/pindah_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -237,26 +239,39 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       ],
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Image.asset(
-                                          "assets/btn_input_mutasi.png"),
-                                      const Text(
-                                        "MUTASI",
-                                        style:
-                                            TextStyle(color: Color(0xff2787BD)),
-                                      )
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, MutasiPage.routName);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                            "assets/btn_input_mutasi.png"),
+                                        const Text(
+                                          "MUTASI",
+                                          style: TextStyle(
+                                              color: Color(0xff2787BD)),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Image.asset("assets/btn_input_kurs.png"),
-                                      const Text(
-                                        "KURS",
-                                        style:
-                                            TextStyle(color: Color(0xff2787BD)),
-                                      )
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, KursPage.routName);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                            "assets/btn_input_kurs.png"),
+                                        const Text(
+                                          "KURS",
+                                          style: TextStyle(
+                                              color: Color(0xff2787BD)),
+                                        )
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
