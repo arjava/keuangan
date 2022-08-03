@@ -1,11 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keuangan/model/failed_login.dart';
 import 'package:keuangan/model/response_login.dart';
 import 'package:keuangan/provider/login_provider.dart';
-import 'package:keuangan/utils/shared_prefs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/users.dart';
 import '../utils/Constant.dart';
@@ -54,6 +56,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: const Color(0xff2787BD),
+    );
     return FlutterLogin(
       title: Constants.appName,
       logo: const AssetImage('assets/logo_jni.png'),
@@ -112,16 +117,20 @@ class LoginPage extends StatelessWidget {
       },
       onLogin: (loginData) async {
         try {
-          ApiLoginProvider _accountApiProvider = ApiLoginProvider();
-          Object response = await _accountApiProvider.getUserLogin(
+          ApiLoginProvider accountApiProvider = ApiLoginProvider();
+          Object response = await accountApiProvider.getUserLogin(
               loginData.name, loginData.password);
           if (response is LoginResponse) {
             LoginResponse loginResponse = response;
             if (loginResponse.status.login) {
-              SharedPrefs sharedPref = SharedPrefs();
-              // await sharedPref.saveDataInt("reg_member_id", 1);
-              await sharedPref.saveData(
-                  "reg_member_id", response.data.user.userId);
+              final prefs = await SharedPreferences.getInstance();
+
+              await prefs.setInt(
+                  'reg_member_id', int.parse(response.data.user.userId));
+
+              if (kDebugMode) {
+                print("SHARED VALUE: ${response.data.user.userId}");
+              }
               return null;
             } else {
               return "ops ada maintenance server nih!";

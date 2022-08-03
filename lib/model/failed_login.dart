@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class FailedLogin {
   FailedLogin({
     this.status,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
@@ -38,17 +39,21 @@ class SharedPrefs {
     return prefs.getString(key);
   }
 
-  saveDataInt(key, int value) async {
+  saveDataInt(String key, int value) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt(key, value);
-      print("sukses : $value");
+      if (kDebugMode) {
+        print("sukses : $value");
+      }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
-  readDataInt(key) async {
+  readDataInt(String key) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(key);
   }
@@ -64,8 +69,8 @@ class SharedPrefs {
   }
 
   readDataBool(key) async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(key);
+    final prefs = await SharedPreferences?.getInstance();
+    return prefs.getBool(key) ?? false;
   }
 
   clearData() async {

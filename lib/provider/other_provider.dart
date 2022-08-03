@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:keuangan/model/failed_login.dart';
-import 'package:keuangan/model/response_login.dart';
 
+import '../model/failed_login.dart';
+import '../model/response_init_data.dart';
 import '../utils/Constant.dart';
 
-class ApiLoginProvider {
-  final String _login = Constants.endpoint("/API/Auth");
+class OtherProvider {
+  final String _initData = Constants.endpoint("/API/Auth/initData");
 
   Dio? _dio;
 
-  ApiLoginProvider() {
+  OtherProvider() {
     BaseOptions baseOptions = BaseOptions(
       receiveTimeout: 50000,
       connectTimeout: 50000,
@@ -19,19 +19,16 @@ class ApiLoginProvider {
     Constants.setupLoggingInterceptor(_dio);
   }
 
-  Future<Object> getUserLogin(username, password) async {
+  Future<Object> getInitData() async {
     try {
-      Response? response = await _dio?.post(_login, data: {
-        "act": "LOGIN",
-        "un": username,
-        "up": password,
-      });
+      Response? response = await _dio
+          ?.post(_initData, data: {"act": "initData", "outlet_id": 1});
       // var valueMap = json.decode(response?.data);
       if (response?.data['status']['error'] == 0) {
         if (kDebugMode) {
           print("RESPONSE LOGIN Atas");
         }
-        return LoginResponse.fromJson(response?.data);
+        return ResponseInitData.fromJson(response?.data);
       } else {
         if (kDebugMode) {
           print("RESPONSE LOGIN Bawah");

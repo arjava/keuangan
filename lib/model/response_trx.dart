@@ -13,7 +13,9 @@ class ResponseTrx {
 
   factory ResponseTrx.fromJson(Map<String, dynamic> json) => ResponseTrx(
         status: Status.fromJson(json["status"]),
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: json["data"] == null
+            ? null
+            : List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
         debugParamSent: DebugParamSent.fromJson(json["debug-param-sent"]),
         debugLive: json["debug-live"],
       );

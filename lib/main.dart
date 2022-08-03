@@ -3,7 +3,6 @@ import 'package:keuangan/screens/dashboard.dart';
 import 'package:keuangan/screens/keluar_page.dart';
 import 'package:keuangan/screens/kurs_page.dart';
 import 'package:keuangan/screens/login_page.dart';
-import 'package:keuangan/screens/masuk_page.dart';
 import 'package:keuangan/screens/mutasi_page.dart';
 import 'package:keuangan/screens/pindah_page.dart';
 import 'package:keuangan/screens/splash_screen.dart';
@@ -63,7 +62,6 @@ class MyApp extends StatelessWidget {
         SplashScreen.routName: (context) => const SplashScreen(),
         LoginPage.routeName: (context) => const LoginPage(),
         DashboardScreen.routeName: (context) => const DashboardScreen(),
-        MasukPage.routName: ((context) => const MasukPage()),
         KeluarPage.routName: ((context) => const KeluarPage()),
         PindahPage.routName: ((context) => const PindahPage()),
         MutasiPage.routName: ((context) => const MutasiPage()),

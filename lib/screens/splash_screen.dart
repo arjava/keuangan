@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:keuangan/screens/dashboard.dart';
-import 'package:keuangan/screens/login_page.dart';
 import 'package:keuangan/utils/shared_prefs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routName = "/splash";
@@ -13,14 +13,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SharedPrefs sharedPrefs = SharedPrefs();
   SystemUiOverlayStyle _currentStyle = SystemUiOverlayStyle.light;
+
+  int? isLogged;
+
   @override
   void initState() {
     setState(() {
       _currentStyle = SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: const Color(0xffffffff),
       );
+
+      // if (kDebugMode) {
+      //   print("SHARED LOG: $isLogged");
+      // }
     });
     if (mounted) {
       Future.delayed(const Duration(seconds: 2), () {
@@ -31,13 +37,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void checkSession() async {
-    if (sharedPrefs.readData("reg_member_id") != null) {
-      // Navigator.pushNamed(context, "/dashboard");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+    // Obtain shared preferences.
+    final prefs = await SharedPreferences.getInstance();
+    // Try reading data from the 'counter' key. If it doesn't exist, returns null.
+    isLogged = prefs.getInt('reg_member_id');
+    if (isLogged == 1) {
+      Navigator.pushNamed(context, "/dashboard");
     } else {
-      // Navigator.pushNamed(context, "/auth");
-      Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPage()));
+      Navigator.pushNamed(context, "/auth");
     }
   }
 
