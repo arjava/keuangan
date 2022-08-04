@@ -62,7 +62,6 @@ class MyApp extends StatelessWidget {
         SplashScreen.routName: (context) => const SplashScreen(),
         LoginPage.routeName: (context) => const LoginPage(),
         DashboardScreen.routeName: (context) => const DashboardScreen(),
-        PindahPage.routName: ((context) => const PindahPage()),
         MutasiPage.routName: ((context) => const MutasiPage()),
         KursPage.routName: ((context) => const KursPage())
       },

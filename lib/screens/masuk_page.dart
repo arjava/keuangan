@@ -91,7 +91,7 @@ class _MasukPageState extends State<MasukPage> with RestorationMixin {
       setState(() {
         _selectedDate.value = newSelectedDate;
         dateSelected =
-            "${_selectedDate.value.year.toString().padLeft(2, "0")}-${_selectedDate.value.month.toString().padLeft(2, "0")}-${_selectedDate.value.day}";
+            "${_selectedDate.value.year}-${_selectedDate.value.month.toString().padLeft(2, "0")}-${_selectedDate.value.day.toString().padLeft(2, "0")}";
       });
     }
   }

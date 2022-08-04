@@ -316,8 +316,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.pushNamed(
-                                                  context, PindahPage.routName);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: ((context) => PindahPage(
+                                                          listOutlet:
+                                                              responseInitData
+                                                                  .data
+                                                                  ?.outletSubs,
+                                                          listCurrency:
+                                                              responseInitData
+                                                                  .data
+                                                                  ?.curTipe))));
                                             },
                                             child: Column(
                                               children: [
