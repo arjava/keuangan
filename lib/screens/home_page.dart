@@ -289,8 +289,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.pushNamed(
-                                                  context, KeluarPage.routName);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => KeluarPage(
+                                                          listOutlet:
+                                                              responseInitData
+                                                                  .data
+                                                                  ?.outletSubs,
+                                                          listCurrency:
+                                                              responseInitData
+                                                                  .data
+                                                                  ?.curTipe)));
                                             },
                                             child: Column(
                                               children: [

@@ -18,7 +18,6 @@ import '../model/failed_login.dart';
 class MasukPage extends StatefulWidget {
   final List<OutletSub?>? listOutlet;
   final String? restorationId;
-
   final List<CurTipe?>? listCurrency;
   const MasukPage(
       {Key? key, this.restorationId, this.listOutlet, this.listCurrency})
@@ -811,7 +810,7 @@ class _MasukPageState extends State<MasukPage> with RestorationMixin {
                           }
                         } else {
                           FailedLogin failedLogin = response as FailedLogin;
-                          showToastError("anda belum login.");
+                          showToastError("error (tidak diketahui)");
                         }
                       },
                       style: ButtonStyle(
